@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
+import com.example.basic_elements_of_android.ContactsActivity
 import com.example.basic_elements_of_android.SecondActivity
 
 @Composable
@@ -24,6 +25,12 @@ fun FirstScreen() {
             context.startActivity(intent1)
         }) {
             Text(text = "Go to Second Screen")
+        }
+        Button(onClick = {
+            val intent2 = ContactsActivity.newIntent(context, "Some text text")
+            context.startActivity(intent2)
+        }) {
+            Text(text = "Go to Contacts Screen")
         }
     }
 }
