@@ -20,6 +20,7 @@ fun FirstScreen() {
         Text(text = "First Screen")
         Button(onClick = {
             val intent1 = Intent(context, SecondActivity::class.java)
+            val intent2 = SecondActivity.newIntent(context, "Some text text")
             context.startActivity(intent1)
         }) {
             Text(text = "Go to Second Screen")

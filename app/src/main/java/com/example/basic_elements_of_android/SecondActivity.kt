@@ -1,5 +1,7 @@
 package com.example.basic_elements_of_android
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
@@ -15,10 +17,19 @@ import com.example.basic_elements_of_android.screens.SecondScreen
 import com.example.basic_elements_of_android.ui.theme.BasicelementsofandroidTheme
 
 class SecondActivity: ComponentActivity() {
+    companion object {
+        const val ARG_EXAMPLE = "Some text"
+
+        fun newIntent(context: Context, someText: String) =
+            Intent(context, SecondActivity::class.java).apply {
+                putExtra(ARG_EXAMPLE, someText)
+            }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("checkData", "SecondActivity: onCreate")
+        val someText = intent?.extras?.getString(ARG_EXAMPLE)
+        Log.d("checkData", "SecondActivity: onCreate $someText")
         enableEdgeToEdge()
         setContent {
             BasicelementsofandroidTheme {
