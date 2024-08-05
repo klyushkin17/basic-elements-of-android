@@ -1,7 +1,9 @@
 package com.example.basic_elements_of_android
 
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
@@ -25,12 +27,19 @@ class SecondActivity: ComponentActivity() {
                 putExtra(ARG_EXAMPLE, someText)
             }
     }
+    lateinit var receiver: BroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val someText = intent?.extras?.getString(ARG_EXAMPLE)
         Log.d("checkData", "SecondActivity: onCreate $someText")
         enableEdgeToEdge()
+
+        receiver = com.example.basic_elements_of_android.receivers.BroadcastReceiver()
+        IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED).also {
+            registerReceiver(receiver, it)
+        }
+
         setContent {
             BasicelementsofandroidTheme {
                 Surface(
@@ -70,6 +79,7 @@ class SecondActivity: ComponentActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        unregisterReceiver(receiver)
         Log.d("checkData", "SecondActivity: onDestroy")
     }
 }
