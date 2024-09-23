@@ -7,7 +7,7 @@ import android.os.IBinder
 
 class MyService: Service() {
     override fun onBind(intent: Intent?): IBinder? {
-        return
+        return calculator
     }
 
     private val calculator = object: ICalculator.Stub() {

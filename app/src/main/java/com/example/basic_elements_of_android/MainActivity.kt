@@ -1,5 +1,7 @@
 package com.example.basic_elements_of_android
 
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -14,12 +16,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.basic_elements_of_android.receivers.BroadcastReceiver
 import com.example.basic_elements_of_android.screens.FirstScreen
 import com.example.basic_elements_of_android.ui.theme.BasicelementsofandroidTheme
 
 class MainActivity : ComponentActivity() {
+
+    private val airPlainModeReceiver = BroadcastReceiver()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        registerReceiver(
+            airPlainModeReceiver,
+            IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+        )
         Log.d("checkData", "MainActivity: onCreate")
         enableEdgeToEdge()
         setContent {
@@ -61,6 +71,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        unregisterReceiver(airPlainModeReceiver)
         Log.d("checkData", "MainActivity: onDestroy")
     }
 }
