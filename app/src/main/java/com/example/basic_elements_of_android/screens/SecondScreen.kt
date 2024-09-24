@@ -36,5 +36,9 @@ fun SecondScreen() {
         }) {
             Text(text = "OnStopService")
         }
+        Button(onClick = {
+        }) {
+            Text(text = "OnStopService")
+        }
     }
 }
